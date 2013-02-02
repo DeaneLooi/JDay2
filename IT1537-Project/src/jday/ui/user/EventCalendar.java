@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
@@ -61,6 +62,18 @@ public class EventCalendar extends BackgroundPanel {
 			public void dateChanged(DateEvent arg0) {
 				//save date into a variable
 				//open new window to show events on day clicked. New dialog?
+				Event event01 = null;
+				try {
+					event01 = EventDAO.getEventByDate(calendar.getDate());
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				if (event01.getDate() == null){
+					JOptionPane.showMessageDialog(myFrame, "There are no events on this date.");
+				}
+				
+				else {
 				JDialog dialog = new JDialog();
 				try {
 					dialog = new EventPopupDialog(calendar.getDate());
@@ -68,9 +81,9 @@ public class EventCalendar extends BackgroundPanel {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				//how to make the dialog appear? **************
+				//make dialog appear
 				dialog.setVisible(true);
-			}
+			}}
 		});
 		calendar.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		calendar.setBounds(10, 94, 730, 395);
