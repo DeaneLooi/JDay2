@@ -13,7 +13,9 @@ import java.beans.PropertyChangeEvent;
 import java.awt.Font;
 import javax.swing.border.MatteBorder;
 import javax.swing.ImageIcon;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.JTextPane;
 import javax.swing.JTable;
@@ -36,9 +38,13 @@ import javax.swing.JTextArea;
 import jday.entities.Event;
 import jday.entities.Member;
 import jday.entities.dao.EventDAO;
+import jday.ui.user.EventPopupDialog;
 import jday.util.BackgroundPanel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
+import org.freixas.jcalendar.DateEvent;
+import org.freixas.jcalendar.DateListener;
 import org.freixas.jcalendar.JCalendarCombo;
 
 public class AUpdateEvent2 extends BackgroundPanel {
@@ -154,6 +160,45 @@ public class AUpdateEvent2 extends BackgroundPanel {
 		dateCalCombo.setBounds(202, 178, 307, 35);
 		add(dateCalCombo);
 		dateCalCombo.setDate(date);
+
+		dateCalCombo.addDateListener(new DateListener() {
+			public void dateChanged(DateEvent arg0) {
+				Event event = null;
+				String info = "";
+				String title = "";
+				String venue = "";
+				//when date change, change the text fields if any
+				try {
+					
+					Calendar cal = Calendar.getInstance();
+					cal.setTime(dateCalCombo.getDate());
+					cal.add(Calendar.DATE, 1);
+					Date date2 = cal.getTime();
+					event = EventDAO.getEventByDate(date2);
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				if (event.getDate() != null){
+					info = event.getInfo();
+					title = event.getTitle();
+					venue = event.getVenue();
+					
+					infoTxtA.setText(info);
+					titleTxtF.setText(title);
+					venueTxtF.setText(venue);
+				}
+				
+				else {
+					infoTxtA.setText("");
+					titleTxtF.setText("");
+					venueTxtF.setText("");
+				}
+				
+				
+			}
+		});
 
 		// venue text field
 		venueTxtF = new JTextField();

@@ -72,9 +72,7 @@ public class EventDAO {
 		cal.setTime(date2);
 		cal.add(Calendar.DATE, 1);
 		date2 = cal.getTime();
-		@SuppressWarnings("deprecation")
-		String date = date2.toGMTString();
-		date = date.substring(0, 11);
+		String date = dateToString(date2);
 
 		String sql = "select * from event where date = '" + date + "';";
 		ResultSet rs = db.readRequest(sql);
