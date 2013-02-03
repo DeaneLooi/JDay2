@@ -15,6 +15,7 @@ import javax.swing.SwingConstants;
 
 import jday.entities.Member;
 import jday.util.BackgroundPanel;
+import javax.swing.border.MatteBorder;
 
 public class AUpdate extends BackgroundPanel {
 	
@@ -33,6 +34,10 @@ public class AUpdate extends BackgroundPanel {
 		setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Courses");
+		lblNewLabel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+		lblNewLabel.setForeground(new Color(255, 204, 255));
+		lblNewLabel.setOpaque(true);
+		lblNewLabel.setBackground(new Color(153, 51, 102));
 		lblNewLabel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -48,10 +53,13 @@ public class AUpdate extends BackgroundPanel {
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblNewLabel.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(131, 234, 133, 110);
+		lblNewLabel.setBounds(131, 259, 174, 61);
 		add(lblNewLabel);
 		
 		JLabel lblEvents = new JLabel("Events");
+		lblEvents.setOpaque(true);
+		lblEvents.setBackground(new Color(153, 51, 102));
+		lblEvents.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		lblEvents.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -62,11 +70,11 @@ public class AUpdate extends BackgroundPanel {
 				myFrame.getContentPane().repaint();
 			}
 		});
-		lblEvents.setForeground(new Color(0, 0, 0));
+		lblEvents.setForeground(new Color(255, 204, 255));
 		lblEvents.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblEvents.setHorizontalAlignment(SwingConstants.CENTER);
 		lblEvents.setHorizontalTextPosition(SwingConstants.CENTER);
-		lblEvents.setBounds(472, 234, 133, 110);
+		lblEvents.setBounds(432, 259, 174, 61);
 		add(lblEvents);
 		
 		JLabel lblUpdate = new JLabel("Update");
